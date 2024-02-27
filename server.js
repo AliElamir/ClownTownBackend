@@ -9,6 +9,8 @@ var roomsRouter = require("./routes/rooms")
 var clownsRouter = require("./routes/clowns")
 
 var app = express()
+var cors = require('cors');
+app.use(cors());
 
 require("dotenv").config()
 require("./config/database")
