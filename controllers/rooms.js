@@ -1,31 +1,37 @@
-const  mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const Room = require("../models/room")
+// const Clown = require("../models/clown")
 
-const reviewSchema = new Schema(
-  {
-    reviewRate: {
-      type: Number,
-      required: true,
-    },
-
-    seller_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Seller",
-      required: true,
-    },
-    buyer_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Buyer",
-      required: true,
-    },
-    description: {
-      //text description from buyer as review
-      type: String,
-    },
-  },
-  {
-    timestamps: true,
+const index = async (req, res) => {
+  //done
+  try {
+    let rooms = await Room.find()
+    res.json(rooms)
+  } catch (err) {
+    res.json({ error: err.message })
   }
-)
+}
 
-module.exports = mongoose.model("Review", reviewSchema)g
+const show = async (req, res) => {
+  //done
+  try {
+    const room = await Room.findById(req.params.id).populate("clowns")
+    res.json(room)
+  } catch (err) {
+    res.json({ error: err.message })
+  }
+}
+
+const newRoom = async (req, res) => {
+  //done
+  try {
+    let newRoom = await Room.create(req.body)
+    res.json(newRoom)
+  } catch (err) {
+    res.json({ error: err.message })
+  }
+}
+module.exports = {
+  newRoom,
+  index,
+  show,
+}
