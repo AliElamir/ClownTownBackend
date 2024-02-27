@@ -7,6 +7,7 @@ const roomSchema = new Schema(
     desc: { type: String, required: true },
     image: { type: String, required: true },
     clowns: [{ type: Schema.Types.ObjectId, ref: "Clown" }],
+    status: { type: Boolean, default: false },
   },
   {
     timestamps: true,
