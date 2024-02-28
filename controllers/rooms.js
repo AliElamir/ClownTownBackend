@@ -1,3 +1,6 @@
+const mongoose = require("mongoose")
+const { ObjectId } = require("mongodb")
+
 const Room = require("../models/room")
 // const Clown = require("../models/clown")
 
@@ -30,7 +33,19 @@ const newRoom = async (req, res) => {
     res.json({ error: err.message })
   }
 }
+
+const updateRoom = async (req, res) => {
+  try {
+    req.body.status = true
+    let room = await Room.updateOne({ _id: req.params.id }, req.body)
+    res.json(room)
+  } catch (err) {
+    res.json({ error: err.message })
+  }
+}
+
 module.exports = {
+  updateRoom,
   newRoom,
   index,
   show,

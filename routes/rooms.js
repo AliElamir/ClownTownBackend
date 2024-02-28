@@ -6,6 +6,8 @@ const roomsController = require("../controllers/rooms")
 router.get("/", roomsController.index)
 //send a room
 router.get("/:id", roomsController.show)
+// update room status
+router.put("/:id", roomsController.updateRoom)
 
 /// for future functionlity
 // create a room
